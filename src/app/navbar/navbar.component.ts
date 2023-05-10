@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  
+  loggedInUser: string;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  loggedIn() {
+    this.loggedInUser = localStorage.getItem('token');
+    return this.loggedInUser
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
   }
 
 }

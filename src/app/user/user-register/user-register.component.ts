@@ -8,6 +8,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 })
 export class UserRegisterComponent implements OnInit {
   registrationForm: FormGroup;
+  user: any = {};
   constructor() { }
 
   ngOnInit() {
@@ -25,8 +26,22 @@ export class UserRegisterComponent implements OnInit {
     { notmatched: true }
   }
 
-  onSubmit(){
-    console.log(this.registrationForm);
+  onSubmit() {
+    this.user = Object.assign(this.user, this.registrationForm.value);
+    let users = [];
+    this.addUser(this.user);
+  }
+
+  addUser(user: any) {
+    let users = [];
+    if (localStorage.getItem('Users')) {
+      console.log(localStorage.getItem('Users'))
+      users = JSON.parse(localStorage.getItem('Users'));
+      users = [user, ...users];
+    } else {
+      users = [user];
+    }
+    localStorage.setItem('Users', JSON.stringify(users));
   }
 
 }
