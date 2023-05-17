@@ -86,15 +86,15 @@ export class AddPropertyComponent implements OnInit {
   onSubmit() {
     this.nextClicked = true;
     if (this.allTabsValid()) {
-      this.mapProperty()
+      this.mapProperty();
       this.housingService.addProperty(this.property);
       if (this.SellRent.value === '1') {
         this.router.navigate(['/']);
       } else {
-        this.router.navigate(['/rent-property'])
+        this.router.navigate(['/rent-property']);
       }
       return;
-    } else console.log(this.addPropertyForm);
+    }
   }
 
   allTabsValid(): boolean {
@@ -129,6 +129,7 @@ export class AddPropertyComponent implements OnInit {
   }
 
   mapProperty(): void {
+    this.property.Id = this.housingService.newPropId();
     this.property.SellRent = +this.SellRent.value;
     this.property.BHK = this.BHK.value;
     this.property.PType = this.PType.value;
